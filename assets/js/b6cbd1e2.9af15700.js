@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkc_77_doc_site=self.webpackChunkc_77_doc_site||[]).push([[8795],{4840:s=>{s.exports=JSON.parse('{"label":"hola","permalink":"/c77-doc-site/blog/tags/hola","allTagsPath":"/c77-doc-site/blog/tags","count":1,"unlisted":false}')}}]);
