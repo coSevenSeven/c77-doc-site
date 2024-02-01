@@ -9,6 +9,7 @@ sidebar_position: 1
 
 - 將 swagger 內容轉換為 typescript 檔案，這個內容以版本`13.0.3`為主
 - [Github 網址](https://github.com/acacode/swagger-typescript-api)
+- [NPM 網址](https://www.npmjs.com/package/swagger-typescript-api)
 
 ![intro](/img/swagger-typescript-api/how-it-works.jpg)
 
