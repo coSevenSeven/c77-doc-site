@@ -3,7 +3,7 @@ sidebar_label: "基本用法"
 sidebar_position: 1
 ---
 
-# swagger typescript api
+# Swagger Typescript Api
 
 ## 介紹
 

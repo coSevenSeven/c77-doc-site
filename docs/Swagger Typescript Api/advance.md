@@ -483,7 +483,6 @@ class Auth {
 
 ## 未解問題
 
-- 如果有特定 Route 不須使用，要怎麼過濾？
 - 如何根據 interface 建立 class
 
 ## 參考
