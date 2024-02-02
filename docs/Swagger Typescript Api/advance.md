@@ -76,22 +76,11 @@ authApi.instance.interceptors.request.use((config) => {
 
 ## 拆解 ts 檔案內容
 
-### modular
-
-> generate separated files for http client, data contracts, and routes (default: false)
-
-把 ts 檔案分成
-
-- http client ( 請求實例 )
-- data contracts ( 所有相關 interface、enum 都會集中在這裡 )
-- routes ( 各 api methods )
-
 ### moduleNameIndex
 
 > determines which path index should be used for routes separation
 
 - 根據給的 index 切分 route，類似用 `Route.split('/')[moduleNameIndex]` 決定切割程度
-- 需要設定 `modular: true`
 
 例如 api 有 auth、member
 
@@ -107,36 +96,68 @@ api/member/post
 ```
 
 ```js
-// moduleNameIndex = 0 產生的結構
-const api = {
-  auth: {
-    get: (id) => {},
-    delete: (id) => {},
-    put: (auth) => {},
-    post: (auth) => {},
+// moduleNameIndex = 0、或未設定 產生的結構
+class Api {
+  api = {
+    authGet: (id) => {},
+    authDelete: (id) => {},
+    authPut: (auth) => {},
+    authPost: (auth) => {},
+    memberGet: (id) => {},
+    memberDelete: (id) => {},
+    memberPut: (auth) => {},
+    memberPost: (auth) => {},
   },
-  member: {
-    get: (id) => {},
-    delete: (id) => {},
-    put: (member) => {},
-    post: (member) => {},
-  },
-};
+}
 
 // moduleNameIndex = 1 產生的結構
-const auth = {
-  get: (id) => {},
-  delete: (id) => {},
-  put: (auth) => {},
-  post: (auth) => {},
-};
+class Api {
+  auth: {
+    authGet: (id) => {},
+    authDelete: (id) => {},
+    authPut: (auth) => {},
+    authPost: (auth) => {},
+  },
+  member: {
+    memberGet: (id) => {},
+    memberDelete: (id) => {},
+    memberPut: (auth) => {},
+    memberPost: (auth) => {},
+  },
+}
+```
 
-const member = {
-  get: (id) => {},
-  delete: (id) => {},
-  put: (member) => {},
-  post: (member) => {},
-};
+### modular
+
+> generate separated files for http client, data contracts, and routes (default: false)
+
+把 ts 檔案分成下列三種 ts 檔案，其中 routes 切割程度依照 `moduleNameIndex` 設定切割
+
+- http client ( 請求實例 )
+- data contracts ( 所有相關 interface、enum 都會集中在這裡 )
+- routes ( 各 api methods )
+
+```typescript
+// molar false
+generateApi({
+  name: "MySuperbApi.ts",
+});
+
+import { Api } from "./__generated__/MySuperbApi";
+
+const inst = new Api();
+const res = await inst.api.authClientLoginCreate({});
+
+// molar true
+generateApi({
+  name: "MySuperbApi.ts",
+  molar: true,
+});
+
+import { Api } from "./__generated__/Api";
+
+const inst = new Api();
+const res = await inst.authClientLoginCreate({});
 ```
 
 ### moduleNameFirstTag
